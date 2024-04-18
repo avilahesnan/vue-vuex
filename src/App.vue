@@ -8,7 +8,16 @@
     </div>
 
     <div class="container">
-      <Contador />
+
+      <div class="row">
+        <div class="col-sm-9 border-end">
+          <TarefasLista />
+        </div>
+        <div class="col-sm-3">
+          <Contador />
+        </div>
+      </div>
+      
     </div>
 
   </div>
@@ -17,10 +26,12 @@
 <script>
 
 import Contador from '@/components/ContadorComponent.vue'
+import TarefasLista from '@/components/TarefasListaComponent.vue'
 
 export default {
   components: {
-    Contador
+    Contador,
+    TarefasLista
   }
 }
 </script>

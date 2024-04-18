@@ -15,15 +15,29 @@
             </div>
         </div>
 
-        <ul class="list-group" v-if="tarefas.length > 0">
+        <h3 class="font-weight-light mt-4">A Fazer ({{ tarefasAFazer.length }})</h3>
+
+        <ul class="list-group" v-if="tarefasAFazer.length > 0">
             <TarefasListaItem
-                v-for="tarefa in tarefas"
+                v-for="tarefa in tarefasAFazer"
                 :key="tarefa.id"
                 :tarefa="tarefa"
                 @editar="selecionarTarefaParaEdicao" />
         </ul>
 
-        <p v-else>Nenhuma tarefa criada.</p>
+        <p v-else>Nenhuma tarefa a fazer.</p>
+
+        <h3 class="font-weight-light mt-4">Concluídas ({{ totalTarefasConcluidas }})</h3>
+
+        <ul class="list-group" v-if="tarefasConcluidas.length > 0">
+            <TarefasListaItem
+                v-for="tarefa in tarefasConcluidas"
+                :key="tarefa.id"
+                :tarefa="tarefa"
+                @editar="selecionarTarefaParaEdicao" />
+        </ul>
+
+        <p v-else>Nenhuma tarefa concluída.</p>
 
         <TarefaSalvar 
             v-if="exibirFormulario"
@@ -34,7 +48,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 import TarefaSalvar from '@/components/TarefaSalvarComponent.vue'
 import TarefasListaItem from '@/components/TaferasListaItemComponent.vue'
@@ -51,9 +65,26 @@ export default {
         }
     },
     computed: {
-        ...mapState(['tarefas'])
+        ...mapState(['tarefas']),
+        ...mapGetters([
+            'tarefasConcluidas',
+            'tarefasAFazer',
+            'totalTarefasConcluidas'
+        ])
+    },
+    created() {
+        setTimeout(() => {
+            this.listarTarefas({
+                tarefas: [
+                    { id: 1, titulo: 'Aprender Vue', concluido: true },
+                    { id: 2, titulo: 'Aprender Vue Router', concluido: true },
+                    { id: 3, titulo: 'Aprender Vuex', concluido: false }
+                ]
+            })
+        }, 2000)
     },
     methods: {
+        ...mapActions(['listarTarefas']),
         exibirFormularioCriarTarefa() {
             if(this.tarefaSelecionada) {
                 this.tarefaSelecionada = undefined

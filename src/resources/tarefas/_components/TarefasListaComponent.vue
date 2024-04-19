@@ -48,10 +48,13 @@
 
 <script>
 
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 
-import TarefaSalvar from '@/components/TarefaSalvarComponent.vue'
-import TarefasListaItem from '@/components/TaferasListaItemComponent.vue'
+import register from '@/resources/tarefas/_store/register'
+import TarefaSalvar from '@/resources/tarefas/_components/TarefaSalvarComponent.vue'
+import TarefasListaItem from '@/resources/tarefas/_components/TaferasListaItemComponent.vue'
+
+const { mapActions, mapGetters, mapState } = createNamespacedHelpers('tarefas')
 
 export default {
     components: {
@@ -69,19 +72,19 @@ export default {
         ...mapGetters([
             'tarefasConcluidas',
             'tarefasAFazer',
-            'totalTarefasConcluidas'
+            'totalTarefasConcluidas',
+            'boasVindas'
         ])
     },
     created() {
-        setTimeout(() => {
-            this.listarTarefas({
-                tarefas: [
-                    { id: 1, titulo: 'Aprender Vue', concluido: true },
-                    { id: 2, titulo: 'Aprender Vue Router', concluido: true },
-                    { id: 3, titulo: 'Aprender Vuex', concluido: false }
-                ]
-            })
-        }, 2000)
+
+        register(this.$store)
+
+        setTimeout(async () => {
+            console.log('Usuário atual: ', this.boasVindas)
+            await this.listarTarefas()
+            console.log('Usuário atual: ', this.boasVindas)
+        }, 1000)
     },
     methods: {
         ...mapActions(['listarTarefas']),

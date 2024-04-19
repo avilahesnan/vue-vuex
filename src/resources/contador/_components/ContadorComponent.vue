@@ -2,7 +2,7 @@
     <div>
         <h2 class="font-weight-light">Contador: {{ contador }}</h2>
         <h4 class="font-weight-light">Contador Alias: {{ contadorAlias }}</h4>
-        <h4 class="font-weight-light">Contador Multiplicado: {{ contadorMultiplicado }}</h4>
+        <h4 class="font-weight-light">Contador Elevado a 2: {{ contadorElevado }}</h4>
         <button
             class="btn btn-lg btn-danger me-1"
             @click="decrementar">
@@ -26,23 +26,21 @@ export default {
             contadorLocal: 2
         }
     },
-    // computed: mapState(['contador']),
     computed: {
-        ...mapState({
-        // contador: state => state.contador,
-        contador: 'contador',
-        contadorAlias: 'contador',
-        contadorMultiplicado(state) {
-            return state.contador * this.contadorLocal
+        ...mapState('contador', {
+        contador: state => state.contador,
+        contadorAlias: state => state.contador,
+        contadorElevado(state) {
+            return Math.pow(state.contador, this.contadorLocal)
         }
     })
     },
     methods: {
         decrementar() {
-            this.$store.state.contador--
+            this.$store.state.contador.contador--
         },
         incrementar() {
-            this.$store.state.contador++
+            this.$store.state.contador.contador++
         }
     }
 }

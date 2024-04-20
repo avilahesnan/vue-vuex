@@ -1,19 +1,29 @@
 {
-    "tarefas": [
-        {
-            "id": 1,
-            "titulo": "Aprender Vue",
-            "concluido": true
-        },
-        {
-            "id": 2,
-            "titulo": "Aprender Vue Router",
-            "concluido": true
-        },
-        {
-            "id": 3,
-            "titulo": "Aprender Vuex",
-            "concluido": false
-        }
-    ]
+  "tarefas": [
+    {
+      "id": "1",
+      "titulo": "Aprender Vue",
+      "concluido": false
+    },
+    {
+      "id": "2",
+      "titulo": "Aprender Vue Router",
+      "concluido": false
+    },
+    {
+      "id": "3",
+      "titulo": "Aprender Vuex",
+      "concluido": false
+    },
+    {
+      "id": "3c6a",
+      "titulo": "Aprender Vue 2 3",
+      "concluido": false
+    },
+    {
+      "id": "e63f",
+      "titulo": "Aprender CLI",
+      "concluido": false
+    }
+  ]
 }

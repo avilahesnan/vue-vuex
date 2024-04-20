@@ -5,12 +5,14 @@
         <form @submit.prevent="salvar">
             <div class="row">
                 <div :class="classeColuna">
-                    <label>Título</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Título da tarefa"
-                        v-model="tarefa.titulo">
+                    <div class="form-group">
+                        <label>Título</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Título da tarefa"
+                            v-model="tarefa.titulo">
+                    </div>
                 </div>
                 <div class="col-sm-2" v-if="tarefaSelecionada">
                     <div class="form-group">
@@ -25,9 +27,9 @@
                     </div>
                 </div>
             </div>
-        </form>
 
-        <button type="submit" class="btn btn-primary mt-2">Salvar</button>
+            <button type="submit" class="btn btn-primary mt-2">Salvar</button>
+        </form>  
     </div>
 </template>
 
